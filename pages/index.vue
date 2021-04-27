@@ -1,9 +1,10 @@
 <template>
   <div class="container">
-    <pre v-if="!$fetchState.pending">{{currentPrayerTime}}</pre>
+    <h1>Prayer Times</h1>
+    <pre v-if="!$fetchState.pending">{{ currentPrayerTime }}</pre>
     <!-- <pre v-if="!$fetchState.pending">{{ prayerTime }}</pre> -->
     <ul>
-        <li v-for="time in currentPrayerTime">{{time.timings}}</li>
+      <li v-for="time in currentPrayerTime">{{ time.timings }}</li>
     </ul>
   </div>
 </template>

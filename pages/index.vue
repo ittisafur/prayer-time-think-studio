@@ -1,21 +1,18 @@
 <template>
-  <div class="container">
-    <h1>Prayer Times</h1>
-    <div v-for="time in currentPrayerTime" :key="time.date.readable">
-        <PrayerTime :times="time.timings" /> 
+  <div>
+    <div class="container">
+      <h1>Prayer Times</h1>
+      <div v-if="$fetchState.pending">Loading.... Please Wait</div>
     </div>
-    <pre v-if="!$fetchState.pending">{{ currentPrayerTime }}</pre>
-    <!-- <pre v-if="!$fetchState.pending">{{ prayerTime }}</pre> -->
-    <!-- <ul>
-      <li v-for="time in currentPrayerTime" :key="time.date.readable">
-        {{ time.timings }}
-      </li>
-    </ul> -->
+    <div v-for="time in currentPrayerTime" :key="time.date.readable">
+      <PrayerTime :times="time.timings" />
+    </div>
   </div>
 </template>
 
 <script>
-import PrayerTime from '~/components/PrayerTime'
+import PrayerTime from "~/components/PrayerTime";
+
 export default {
   data() {
     return {
@@ -23,8 +20,8 @@ export default {
       prayerTime: null,
     };
   },
-  components:{
-    PrayerTime
+  components: {
+    PrayerTime,
   },
   head() {
     return {
@@ -41,10 +38,10 @@ export default {
   async fetch() {
     await this.$axios
       .$get(
-        "http://api.aladhan.com/v1/calendar?latitude=23.810331&longitude=90.412521&method=1&month=5&year=2021"
+        "http://api.aladhan.com/v1/calendar?latitude=23.746&longitude=90.382&method=1&month=5&year=2021"
       )
       .then((res) => (this.prayerTime = res.data))
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   },
   computed: {
     currentPrayerTime() {

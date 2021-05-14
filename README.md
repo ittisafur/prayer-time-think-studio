@@ -1,20 +1,17 @@
 # prayer-time
 
-## Build Setup
+## Setup
 
 ```bash
 # install dependencies
 $ yarn install
-
 # serve with hot reload at localhost:3000
 $ yarn dev
 
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+TODOS
+
+- [x] Render today's prayer time in Dhaka
+- [ ] Work on getting the location ( A bit was done with the vanilla js experiment using navigator.geolocation.getCurrentPosition() ). We can use it with the api to pin point the location and get the country and other details
+- [ ] Months, Years and Method ( Which source is used to render the time ex  University of Islamic Sciences, Karachi) is being used

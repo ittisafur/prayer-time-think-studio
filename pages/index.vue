@@ -4,8 +4,10 @@
       <h1>Prayer Times</h1>
       <div v-if="$fetchState.pending">Loading.... Please Wait</div>
     </div>
-    <div v-for="time in currentPrayerTime" :key="time.date.readable">
-      <PrayerTime :times="time.timings" />
+    <div v-if="!$fetchState.pending">
+      <div v-for="time in currentPrayerTime" :key="time.date.readable">
+        <PrayerTime :times="time.timings" />
+      </div>
     </div>
   </div>
 </template>
@@ -14,6 +16,7 @@
 import PrayerTime from "~/components/PrayerTime";
 
 export default {
+  fetchOnServer: false,
   data() {
     return {
       title: "Prayer times - Think Studio",
@@ -28,23 +31,9 @@ export default {
     PrayerTime,
   },
   async fetch() {
-    await this.$axios
-      .$get(
-        //`http://api.aladhan.com/v1/calendar?latitude=${this.geolocation.lat}&longitude=${this.geolocation.lng}&method=1&month=5&year=2021`
-        `http://api.aladhan.com/v1/calendar?latitude=23.746&longitude=90.382&method=1&month=5&year=2021`
-      )
-      .then((res) => (this.prayerTime = res.data))
-      .catch((err) => console.log(err));
-  },
-  mounted() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        this.geolocation.lat = pos.coords.latitude;
-        this.geolocation.lng = pos.coords.longitude;
-      });
-    } else {
-      alert("Please enable location detection to pin point prayer times.");
-    }
+    this.getGeoPermission().then(async () => {
+      this.getPrayerTimes();
+    });
   },
   computed: {
     currentPrayerTime() {
@@ -52,9 +41,32 @@ export default {
       time.setHours(23, 59, 59, 999);
       let modifyTime = time.toUTCString();
       let findCurrentDate = modifyTime.slice(5, 16);
-      return this.prayerTime.filter(
+      return this.prayerTime?.filter(
         (time) => time.date.readable == findCurrentDate
       );
+    },
+  },
+  methods: {
+    getGeoPermission() {
+      if (navigator.geolocation) {
+        return new Promise((resolve) => {
+          navigator.geolocation.getCurrentPosition((pos) => {
+            this.geolocation.lat = pos.coords.latitude;
+            this.geolocation.lng = pos.coords.longitude;
+            resolve(pos);
+          });
+        });
+      } else {
+        console.error("Your browser dont support geo location support");
+      }
+    },
+    async getPrayerTimes() {
+      await this.$axios
+        .$get(
+          `http://api.aladhan.com/v1/calendar?latitude=${this.geolocation.lat}&longitude=${this.geolocation.lng}&method=1&month=5&year=2021`
+        )
+        .then((res) => (this.prayerTime = res.data))
+        .catch((err) => console.log(err));
     },
   },
   head() {
@@ -71,5 +83,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>

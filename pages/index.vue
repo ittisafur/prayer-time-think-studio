@@ -63,7 +63,7 @@ export default {
     async getPrayerTimes() {
       await this.$axios
         .$get(
-          `http://api.aladhan.com/v1/calendar?latitude=${this.geolocation.lat}&longitude=${this.geolocation.lng}&method=1&month=5&year=2021`
+          `https://api.aladhan.com/v1/calendar?latitude=${this.geolocation.lat}&longitude=${this.geolocation.lng}&method=1&month=5&year=2021`
         )
         .then((res) => (this.prayerTime = res.data))
         .catch((err) => console.log(err));

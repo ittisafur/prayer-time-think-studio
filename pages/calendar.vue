@@ -27,9 +27,10 @@ export default {
   },
   mounted() {
     this.$axios
-      .$get("https://api.aladhan.com/v1/gToHCalendar/5/2021")
+      .$get(
+        `https://api.aladhan.com/v1/gToHCalendar/${this.$currentDate.month}/${this.$currentDate.year}`
+      )
       .then(res => {
-        // this.events = this.formatDatesForCalender(res.data.data);
         this.events = this.formatDatesForCalender(res.data);
         console.log(res.data);
       });

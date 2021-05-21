@@ -22,7 +22,11 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/timeFormatter", "~/plugins/calendar.client.js"],
+  plugins: [
+    "~/plugins/timeFormatter",
+    "~/plugins/calendar.client",
+    "~/plugins/currentDate"
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

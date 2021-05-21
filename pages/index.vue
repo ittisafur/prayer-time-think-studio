@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <h1>Prayer Times</h1>
+      <h1>Prayer Times <span v-html="countryFlag"></span></h1>
       <div v-if="$fetchState.pending">Loading.... Please Wait</div>
     </div>
     <div v-if="!$fetchState.pending">
@@ -21,6 +21,7 @@ export default {
     return {
       title: "Prayer times - Think Studio",
       prayerTime: null,
+      countryFlag: null,
       geolocation: {
         lat: 0,
         lng: 0
@@ -31,9 +32,11 @@ export default {
     PrayerTime
   },
   async fetch() {
-    this.getGeoPermission().then(async () => {
-      this.getPrayerTimes();
-    });
+    // this.getGeoPermission().then(async () => {
+    //   this.getPrayerTimes();
+    // });
+
+    this.getPrayerTimes();
   },
   computed: {
     currentPrayerTime() {
@@ -47,23 +50,37 @@ export default {
     }
   },
   methods: {
-    getGeoPermission() {
-      if (navigator.geolocation) {
-        return new Promise(resolve => {
-          navigator.geolocation.getCurrentPosition(pos => {
-            this.geolocation.lat = pos.coords.latitude;
-            this.geolocation.lng = pos.coords.longitude;
-            resolve(pos);
-          });
-        });
-      } else {
-        console.error("Your browser dont support geo location support");
-      }
-    },
+    // getGeoPermission() {
+    //   if (navigator.geolocation) {
+    //     return new Promise(resolve => {
+    //       navigator.geolocation.getCurrentPosition(pos => {
+    //         this.geolocation.lat = pos.coords.latitude;
+    //         this.geolocation.lng = pos.coords.longitude;
+    //         resolve(pos);
+    //       });
+    //     });
+    //   } else {
+    //     console.error("Your browser dont support geo location support");
+    //   }
+    // },
     async getPrayerTimes() {
+      const { ip } = await this.$axios.$get(
+        "https://api.ipify.org/?format=json"
+      );
+
+      const {
+        latitude,
+        longitude,
+        location: { country_flag_emoji }
+      } = await this.$axios.$get(
+        `http://api.ipstack.com/${ip}?access_key=fb0ae3fd6949bff18ac8fabc73624197`
+      );
+
+      this.countryFlag = country_flag_emoji;
+
       await this.$axios
         .$get(
-          `https://api.aladhan.com/v1/calendar?latitude=${this.geolocation.lat}&longitude=${this.geolocation.lng}&method=1&month=5&year=2021`
+          `https://api.aladhan.com/v1/calendar?latitude=${latitude}&longitude=${longitude}&method=1&month=${this.$currentDate.month}&year=${this.$currentDate.year}`
         )
         .then(res => (this.prayerTime = res.data))
         .catch(err => console.log(err));

@@ -23,12 +23,12 @@ export default {
       prayerTime: null,
       geolocation: {
         lat: 0,
-        lng: 0,
-      },
+        lng: 0
+      }
     };
   },
   components: {
-    PrayerTime,
+    PrayerTime
   },
   async fetch() {
     this.getGeoPermission().then(async () => {
@@ -42,15 +42,15 @@ export default {
       let modifyTime = time.toUTCString();
       let findCurrentDate = modifyTime.slice(5, 16);
       return this.prayerTime?.filter(
-        (time) => time.date.readable == findCurrentDate
+        time => time.date.readable == findCurrentDate
       );
-    },
+    }
   },
   methods: {
     getGeoPermission() {
       if (navigator.geolocation) {
-        return new Promise((resolve) => {
-          navigator.geolocation.getCurrentPosition((pos) => {
+        return new Promise(resolve => {
+          navigator.geolocation.getCurrentPosition(pos => {
             this.geolocation.lat = pos.coords.latitude;
             this.geolocation.lng = pos.coords.longitude;
             resolve(pos);
@@ -65,9 +65,9 @@ export default {
         .$get(
           `https://api.aladhan.com/v1/calendar?latitude=${this.geolocation.lat}&longitude=${this.geolocation.lng}&method=1&month=5&year=2021`
         )
-        .then((res) => (this.prayerTime = res.data))
-        .catch((err) => console.log(err));
-    },
+        .then(res => (this.prayerTime = res.data))
+        .catch(err => console.log(err));
+    }
   },
   head() {
     return {
@@ -76,10 +76,10 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "The Prayer Time Web App",
-        },
-      ],
+          content: "The Prayer Time Web App"
+        }
+      ]
     };
-  },
+  }
 };
 </script>

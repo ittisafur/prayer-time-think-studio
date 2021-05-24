@@ -327,7 +327,7 @@ export default {
       );*/
       // end using ipify and ipstack
       const { ip, longitude,latitude, emoji_flag } = await this.$axios.$get(
-          `https://api.ipdata.co/?api-key=${process.env.IP_DATA_KEY}`
+          `https://api.ipdata.co/?api-key=40d84a78d40bf66e84a862bff02e33647c7bf6afefa2927de1690e09`
       );
 
       this.countryFlag = emoji_flag;

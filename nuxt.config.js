@@ -15,8 +15,7 @@ export default {
 
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: [
-        "~assets/css/app.css",
-        "~assets/sass/app.scss",
+        "~assets/styles/app.scss",
         // Vue Simple Calendar css
         "~/node_modules/vue-simple-calendar/static/css/default.css"
     ],
@@ -33,13 +32,12 @@ export default {
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
-        '@nuxtjs/dotenv'
+        '@nuxtjs/dotenv',
+        '@nuxtjs/tailwindcss'
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
-        // https://go.nuxtjs.dev/bootstrap
-        "bootstrap-vue/nuxt",
         // https://go.nuxtjs.dev/axios
         "@nuxtjs/axios"
     ],
@@ -48,7 +46,12 @@ export default {
     axios: {},
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
-    build: {
+    build: {},
 
+    tailwindcss: {
+        cssPath: '~/assets/styles/app.scss',
+        configPath: 'tailwind.config.js',
+        exposeConfig: false,
+        config: {}
     }
 };

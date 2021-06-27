@@ -1,19 +1,9 @@
 <template>
-  <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <NuxtLink class="nav-link active" to="/">Home</NuxtLink>
-            </li>
-            <li class="nav-item">
-              <NuxtLink class="nav-link" to="/calendar">Calendar</NuxtLink>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <div class="flex justify-between py-5 mx-auto wrapper">
+    <h1>Prayer Times</h1>
+    <div class="flex space-x-5">
+      <NuxtLink class="nav-link active" to="/">Home</NuxtLink>
+      <NuxtLink class="nav-link" to="/calendar">Calendar</NuxtLink>
+    </div>
   </div>
 </template>

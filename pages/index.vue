@@ -1,6 +1,5 @@
 <template>
   <div class="mx-auto wrapper">
-    <h1 class="text-3xl">Prayer Times <span v-html="countryFlag"></span></h1>
 
     <div v-if="$fetchState.pending">
       <div class="w-16 h-16 mx-auto ">
@@ -8,6 +7,7 @@
       </div>
     </div>
 
+      <!-- class="grid grid-cols-1 gap-5 mt-10 md:gap-10 md:grid-cols-5" -->
     <div
       v-if="!$fetchState.pending"
       class="grid grid-cols-1 gap-5 mt-10 md:gap-10 md:grid-cols-5"
@@ -15,18 +15,18 @@
       <div
         v-for="(time, prayerName) in todaysPrayerTimes"
         :key="prayerName"
-        class="flex flex-col items-center justify-center h-40 text-center bg-white rounded-md shadow"
         :class="{ 'bg-gray-800 text-white': isUpcomingPrayer(prayerName) }"
       >
         <div class="text-danger" v-if="isUpcomingPrayer(prayerName)">
-          <p>Upcoming Prayer {{ prayerName }}</p>
+          <p class="text-2xl font-bold text-bismillah-blue-950">{{prayerName}}</p>
+          <p class="flex text-lg text-bismillah-blue-250">Next prayer in </p>
           <CountDown :timestamp="comingPrayerTimestamp" />
-          <p>{{ $timeFormatter(time) }}</p>
+          <p class="text-2xl font-normal text-bismillah-blue-950">{{ $timeFormatter(time) }}</p>
         </div>
         <div v-else>
           <div class="flex flex-col ">
-            <p class="text-xl font-bold ">{{ prayerName }}</p>
-            <p>{{ $timeFormatter(time) }}</p>
+            <p class="text-sm font-bold text-bismillah-blue-950">{{ prayerName }}</p>
+            <p class="text-2xl font-normal text-bismillah-blue-950">{{ $timeFormatter(time) }}</p>
           </div>
         </div>
       </div>

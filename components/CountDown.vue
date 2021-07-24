@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3 class="text-3xl font-bold">{{ hour }}:{{ minute }}:{{ second }}</h3>
+  <div class="flex">
+    <h3 class="flex text-lg font-bold text-bismisllah-blue-250">{{ hour }}:{{ minute }}:{{ second }}</h3>
   </div>
 </template>
 <script>

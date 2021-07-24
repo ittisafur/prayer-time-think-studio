@@ -13,6 +13,13 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    fontFamily:{
+        'nunito': ['Nunito Sans', 'sans-serif'],
+    },
+    colors:{
+      'bismillah-blue-950': '#142355',
+      'bismisllah-blue-250': '#5A6588',
+    }
   },
   variants: {
     extend: {},

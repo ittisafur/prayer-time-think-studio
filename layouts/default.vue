@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="font-nunito">
     <Header />
     <Nuxt />
   </div>

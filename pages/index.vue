@@ -1,13 +1,12 @@
 <template>
   <div class="mx-auto wrapper">
-
     <div v-if="$fetchState.pending">
       <div class="w-16 h-16 mx-auto ">
         <LoadingIcon :loading="$fetchState.pending" />
       </div>
     </div>
 
-      <!-- class="grid grid-cols-1 gap-5 mt-10 md:gap-10 md:grid-cols-5" -->
+    <!-- class="grid grid-cols-1 gap-5 mt-10 md:gap-10 md:grid-cols-5" -->
     <div
       v-if="!$fetchState.pending"
       class="grid grid-cols-1 gap-5 mt-10 md:gap-10 md:grid-cols-5"
@@ -18,15 +17,25 @@
         :class="{ 'bg-gray-800 text-white': isUpcomingPrayer(prayerName) }"
       >
         <div class="text-danger" v-if="isUpcomingPrayer(prayerName)">
-          <p class="text-2xl font-bold text-bismillah-blue-950">{{prayerName}}</p>
-          <p class="flex text-lg text-bismillah-blue-250">Next prayer in </p>
-          <CountDown :timestamp="comingPrayerTimestamp" />
-          <p class="text-2xl font-normal text-bismillah-blue-950">{{ $timeFormatter(time) }}</p>
+          <p class="text-2xl font-bold text-bismillah-blue-950">
+            {{ prayerName }}
+          </p>
+          <div class="flex">
+            <p class="text-lg text-bismillah-blue-250">Next prayer in</p>
+            <CountDown :timestamp="comingPrayerTimestamp" />
+          </div>
+          <p class="text-2xl font-normal text-bismillah-blue-950">
+            {{ $timeFormatter(time) }}
+          </p>
         </div>
         <div v-else>
           <div class="flex flex-col ">
-            <p class="text-sm font-bold text-bismillah-blue-950">{{ prayerName }}</p>
-            <p class="text-2xl font-normal text-bismillah-blue-950">{{ $timeFormatter(time) }}</p>
+            <p class="text-sm font-bold text-bismillah-blue-950">
+              {{ prayerName }}
+            </p>
+            <p class="text-2xl font-normal text-bismillah-blue-950">
+              {{ $timeFormatter(time) }}
+            </p>
           </div>
         </div>
       </div>
@@ -50,12 +59,12 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "The Prayer Time Web App"
-        }
+          content: "The Prayer Time Web App",
+        },
       ],
       bodyAttrs: {
-        class: "bg-gray-200"
-      }
+        class: "bg-gray-200",
+      },
     };
   },
   data() {
@@ -68,8 +77,8 @@ export default {
       countryFlag: null,
       geolocation: {
         lat: 0,
-        lng: 0
-      }
+        lng: 0,
+      },
     };
   },
   async fetch() {
@@ -84,7 +93,7 @@ export default {
       let findCurrentDate = modifyTime.slice(5, 16);
 
       const [ajkerSomoys] = this.prayerTime?.filter(
-        time => time.date.readable == findCurrentDate
+        (time) => time.date.readable == findCurrentDate
       );
 
       delete ajkerSomoys.timings.Sunset;
@@ -93,7 +102,7 @@ export default {
       delete ajkerSomoys.timings.Midnight;
 
       return ajkerSomoys.timings;
-    }
+    },
   },
   methods: {
     isUpcomingPrayer(prayerName) {
@@ -177,9 +186,9 @@ export default {
         .$get(
           `https://api.aladhan.com/v1/calendar?latitude=${latitude}&longitude=${longitude}&method=${method}&month=${this.$currentDate.month}&year=${this.$currentDate.year}`
         )
-        .then(res => (this.prayerTime = res.data))
-        .catch(err => console.log(err));
-    }
-  }
+        .then((res) => (this.prayerTime = res.data))
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>

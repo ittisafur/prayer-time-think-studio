@@ -1,6 +1,8 @@
 <template>
-  <div class="flex">
-    <h3 class="flex text-lg font-bold text-bismisllah-blue-250">{{ hour }}:{{ minute }}:{{ second }}</h3>
+  <div class="">
+    <h3 class="text-lg font-bold text-bismisllah-blue-250">
+      {{ hour }}:{{ minute }}:{{ second }}
+    </h3>
   </div>
 </template>
 <script>
@@ -12,7 +14,7 @@ export default {
       minute: null,
       second: null,
       day: null,
-      countDate: new Date(this.timestamp).getTime()
+      countDate: new Date(this.timestamp).getTime(),
     };
   },
   mounted() {
@@ -32,7 +34,7 @@ export default {
       this.hour = Math.floor((gap % day) / hour);
       this.minute = Math.floor((gap % hour) / minute);
       this.second = Math.floor((gap % minute) / second);
-    }
-  }
+    },
+  },
 };
 </script>

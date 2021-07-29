@@ -14,4 +14,4 @@ TODOS
 
 - [x] Render today's prayer time in Dhaka
 - [ ] Work on getting the location ( A bit was done with the vanilla js experiment using navigator.geolocation.getCurrentPosition() ). We can use it with the api to pin point the location and get the country and other details
-- [ ] Months, Years and Method ( Which source is used to render the time ex  University of Islamic Sciences, Karachi) is being used
+- [x] Months, Years and Method ( Which source is used to render the time ex  University of Islamic Sciences, Karachi) is being used

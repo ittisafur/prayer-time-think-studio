@@ -11,34 +11,14 @@
       v-if="!$fetchState.pending"
       class="grid grid-cols-1 gap-5 mt-10 md:gap-10 md:grid-cols-5"
     >
-      <!-- :class="{ 'bg-gray-800 text-white': isUpcomingPrayer(prayerName) }" -->
       <div v-for="(time, prayerName) in todaysPrayerTimes" :key="prayerName">
-        <div v-if="isUpcomingPrayer(prayerName)">
-          <p class="mb-5 text-sm font-bold text-bismillah-blue-950">
-            {{ prayerName.toUpperCase() }}
-          </p>
-          <div class="flex">
-            <p class="mb-2.5 text-lg font-semibold text-bismisllah-blue-250">
-              Next prayer in
-            </p>
-            <CountDown :timestamp="comingPrayerTimestamp" />
-          </div>
-          <p
-            class="text-2xl font-normal text-left md:text-center text-bismillah-blue-950"
-          >
-            {{ $timeFormatter(time) }}
-          </p>
-        </div>
-        <div v-else>
-          <div class="flex flex-col ">
-            <p class="mb-5 text-sm font-bold text-bismillah-blue-950">
-              {{ prayerName.toUpperCase() }}
-            </p>
-            <p class="text-2xl font-normal text-bismillah-blue-950">
-              {{ $timeFormatter(time) }}
-            </p>
-          </div>
-        </div>
+        <UpComingTimeBox
+          v-if="isUpcomingPrayer(prayerName)"
+          :comingPrayerTimestamp="comingPrayerTimestamp"
+          :prayerName="prayerName"
+          :time="time"
+        />
+        <TimeBox v-else :prayerName="prayerName" :time="time" />
       </div>
     </div>
 
@@ -51,6 +31,8 @@
         Fajr 18.0 degrees, Isha 18.0 degrees, Hanbali, Maliki, Shafi
       </p>
     </div>
+
+    <Sidebar />
   </div>
 </template>
 
@@ -73,9 +55,6 @@ export default {
           content: "The Prayer Time Web App",
         },
       ],
-      bodyAttrs: {
-        class: "bg-gray-200",
-      },
     };
   },
   data() {
@@ -83,7 +62,7 @@ export default {
       comingPrayerTimestamp: null,
       comingPrayerName: null,
       method: 1,
-      title: "Prayer times - Think Studio",
+      title: "Bismiallah",
       prayerTime: null,
       countryFlag: null,
       geolocation: {

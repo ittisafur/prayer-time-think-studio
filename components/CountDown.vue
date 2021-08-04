@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <h3 class="text-lg font-bold text-bismisllah-blue-250">
       &nbsp; {{ hour }}:{{ minute }}:{{ second }}
     </h3>

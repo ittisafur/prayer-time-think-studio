@@ -10,3 +10,6 @@ You can directly use them in pages and other components without the need to impo
 - `<Header>` | `<header>` (components/Header.vue)
 - `<LoadingIcon>` | `<loading-icon>` (components/LoadingIcon.vue)
 - `<Options>` | `<options>` (components/Options.vue)
+- `<Sidebar>` | `<sidebar>` (components/Sidebar.vue)
+- `<TimeBox>` | `<time-box>` (components/TimeBox.vue)
+- `<UpComingTimeBox>` | `<up-coming-time-box>` (components/UpComingTimeBox.vue)

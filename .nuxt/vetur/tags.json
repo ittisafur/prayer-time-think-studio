@@ -10,5 +10,14 @@
   },
   "Options": {
     "description": "Auto imported from components/Options.vue"
+  },
+  "Sidebar": {
+    "description": "Auto imported from components/Sidebar.vue"
+  },
+  "TimeBox": {
+    "description": "Auto imported from components/TimeBox.vue"
+  },
+  "UpComingTimeBox": {
+    "description": "Auto imported from components/UpComingTimeBox.vue"
   }
 }

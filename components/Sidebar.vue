@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar w-[320px] absolute top-0 right-0 h-screen px-4">
+  <div class="sidebar w-[320px] absolute top-0 right-0 h-screen px-4 hidden">
     <div class="pt-28">
       <div class="tracking-widest text-lg border-b border-[#DADCE4] py-3">
         <h3>Prayer Times in</h3>
@@ -16,8 +16,8 @@
 
         <div class="mt-4 space-y-4 ">
           <div>
-            <p class="text-base">Brisal</p>
-            <p class="text-base">Brisal Division</p>
+            <p class="text-base">Barisal</p>
+            <p class="text-base">Barisal Division</p>
           </div>
 
           <div>
@@ -40,6 +40,12 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: [],
+};
+</script>
 
 <style scoped>
 .sidebar {

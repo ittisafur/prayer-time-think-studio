@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto wrapper">
     <div v-if="$fetchState.pending">
-      <div class="w-16 h-16 mx-auto ">
+      <div class="w-16 h-16 mx-auto  ">
         <LoadingIcon :loading="$fetchState.pending" />
       </div>
     </div>
@@ -165,9 +165,10 @@ export default {
         `http://api.ipstack.com/${ip}?access_key=fb0ae3fd6949bff18ac8fabc73624197`
       );*/
       // end using ipify and ipstack
-      const { ip, longitude, latitude, emoji_flag } = await this.$axios.$get(
+      const {longitude, latitude, emoji_flag } = await this.$axios.$get(
         `https://api.ipdata.co/?api-key=40d84a78d40bf66e84a862bff02e33647c7bf6afefa2927de1690e09`
       );
+      console.log(longitude)
 
       this.countryFlag = emoji_flag;
       this.geolocation.lat = latitude;
